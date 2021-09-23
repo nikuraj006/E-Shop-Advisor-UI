@@ -5,8 +5,8 @@ import { useHistory } from "react-router-dom";
 function Login() {
 
 const history = useHistory();
+
 const handleLogin= ()=>{
-    const handleLogin= ()=>{
 
         let email = document.getElementById("Lemail").value;
         let password = document.getElementById("Lpassword").value;
@@ -24,7 +24,7 @@ const handleLogin= ()=>{
             }
          
     })
-    }
+
 }
 
   return (
