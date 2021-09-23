@@ -6,7 +6,25 @@ function Login() {
 
 const history = useHistory();
 const handleLogin= ()=>{
-     history.push("/home");
+    const handleLogin= ()=>{
+
+        let email = document.getElementById("Lemail").value;
+        let password = document.getElementById("Lpassword").value;
+    
+        fetch('url',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ "email": email, "password": password })
+        }).then(response => response.json())
+        .then(data => {
+            if (data.message === "SUCCESS") {
+                history.push("/home");
+            }
+         
+    })
+    }
 }
 
   return (
