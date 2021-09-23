@@ -1,10 +1,28 @@
 import Navbar from './navBar';
 import icon1 from "../assests/images/2.png";
 import p1 from "../assests/images/p.jpg";
-
+import React, { useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 
 function Profile() {
-    
+    let profile = JSON.parse(localStorage.getItem('profile'));
+    const history = useHistory();
+    useEffect(() => {
+        document.querySelectorAll(".form-control").forEach(elem => elem.disabled = true);
+
+        document.getElementById("fname").value=profile.firstName;
+        document.getElementById("email").value=profile.email;
+        document.getElementById("dob").value=profile.dateOfBirth.split('T')[0];
+        document.getElementById("height").value=profile.height;
+        // document.getElementById("like").value=profile.
+        // document.getElementById("dislike").value=profile.
+        // document.getElementById("city").value=profile.
+        // document.getElementById("address").value=profile.
+        document.getElementById("e-mail").innerHTML=profile.email;
+        document.getElementById("fulll-name").innerHTML=profile.firstName + " " +profile.lastName;
+
+    }, []);
+
 let btnValue ="Following";
 const handleFollow=(e)=>{
 if(e.target.textContent==='Following'){
@@ -17,6 +35,68 @@ else{
 
 }
     }
+
+    const save= ()=>{
+
+        let fname = document.getElementById("fname").value;
+        let email = document.getElementById("email").value;
+        let dob = document.getElementById("dob").value;   
+        let height = document.getElementById("height").value;   
+        // let dob = document.getElementById("dob").value;   
+        // let dob = document.getElementById("dob").value;   
+        // let dob = document.getElementById("dob").value; 
+        let url = "http://localhost:8080/api/v1/profile/"+profile.profileId;
+        fetch(url,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                {
+                    "email":email,
+                    "firstName":fname,
+                    "lastName":profile.lastName,
+                    "dateOfBirth":dob,
+                    "gender":null,
+                    "height": height,
+                    "likesList":[{
+                        "subCategory":{
+                            "name":"",
+                            "category":{
+                            "name":""
+                        }
+                        }
+                    },
+                    {
+                            "category":{
+                            "name":""
+                        }
+                    }
+                    ],
+                    "dislikesList":[{
+                        "subCategory":{
+                            "name":"",
+                            "category":{
+                            "name":""
+                        }
+                        }
+                    }]
+                }
+            )
+        }).then(response => response.json())
+        .then(data => {
+            if (data.profileId != undefined) {
+                localStorage.setItem('profile', JSON.stringify(data));
+                history.push("/profile");
+            }else if(data.violations.length>0){
+                console.log(data.violations[0].message);
+
+            }      
+        })
+    
+    
+    }
+    
 const connections=[
     {icon:"/assets/2.png",name:"Mary Johnson",city:"Delhi"},
     {icon:"/assets/2.png",name:"Mary Johnson",city:"Delhi"},
@@ -25,8 +105,10 @@ const connections=[
 
 ]
 const editForm=()=>{
-    document.querySelectorAll(".form-control").forEach(elem => elem.disabled = true);
+    document.querySelectorAll(".form-control").forEach(elem => elem.disabled = false);
 }
+
+
   return (
      <>
        <Navbar></Navbar>
@@ -45,8 +127,8 @@ const editForm=()=>{
                <div className="col-sm-4">
                    <div className="profilCard">
                         <img alt="icon" src="https://bootdey.com/img/Content/avatar/avatar7.png"/>
-                   <div className="pt-20">Sam Maxwell</div>
-                   <div>Sam.maxwell@yahoo.com</div>
+                   <div id="fulll-name" className="pt-20">Sam Maxwell</div>
+                   <div id="e-mail">Sam.maxwell@yahoo.com</div>
                    </div>
                </div>
                <div className="col-sm-8 pr-30">
@@ -54,7 +136,7 @@ const editForm=()=>{
                     <div className="col-sm-6">
                         <div className="form-group">
                             <label>Full Name:</label>
-                            <input type="text" className="form-control" id="fname" placeholder="Enter Full Name" />
+                            <input type="text" className="form-control"  id="fname" placeholder="Enter First Name" />
                         </div>
                     </div>
                     <div className="col-sm-6">
@@ -78,19 +160,19 @@ const editForm=()=>{
                     <div className="col-sm-6">
                         <div className="form-group">
                             <label>Likes:</label>
-                            <input type="text" className="form-control" id="lname" placeholder="Enter Likes" />
+                            <input type="text" className="form-control" id="like" placeholder="Enter Likes" />
                         </div>
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
                             <label>Dislikes:</label>
-                            <input type="text" className="form-control" id="lname" placeholder="Enter Dislikes" />
+                            <input type="text" className="form-control" id="dilike" placeholder="Enter Dislikes" />
                         </div>
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
                             <label>City:</label>
-                            <input type="text" className="form-control" id="lname" placeholder="Enter City" />
+                            <input type="text" className="form-control" id="city" placeholder="Enter City" />
                         </div>
                     </div>
                     <div className="col-sm-6">
@@ -100,6 +182,8 @@ const editForm=()=>{
                         </div>
                     </div>
                   </div>
+                  <button onClick={save}>Save</button>
+
                </div>
                    </div>            
         
@@ -133,6 +217,7 @@ const editForm=()=>{
     </div>
      </>
   );
+ 
 }
 
 export default Profile;
