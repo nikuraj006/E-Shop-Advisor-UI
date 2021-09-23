@@ -12,7 +12,9 @@ function Profile() {
 
         document.getElementById("fname").value=profile.firstName;
         document.getElementById("email").value=profile.email;
-        document.getElementById("dob").value=profile.dateOfBirth.split('T')[0];
+        if(profile.dateOfBirth != null){
+            document.getElementById("dob").value=profile.dateOfBirth.split('T')[0];
+        }
         document.getElementById("height").value=profile.height;
         // document.getElementById("like").value=profile.
         // document.getElementById("dislike").value=profile.
@@ -92,8 +94,7 @@ else{
                 console.log(data.violations[0].message);
 
             }      
-        })
-    
+        })  
     
     }
     
@@ -185,8 +186,7 @@ const editForm=()=>{
                   <button onClick={save}>Save</button>
 
                </div>
-                   </div>            
-        
+                   </div>                 
       
 
             <div className="sectionHeading mb-30 mt-45">Connections</div>
@@ -211,8 +211,7 @@ const editForm=()=>{
                         )
                     })
                 }            
-            </div>
-          
+            </div>          
         </div>
     </div>
      </>
