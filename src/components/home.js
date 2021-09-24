@@ -1,11 +1,18 @@
 import Navbar from './navBar';
 import icon1 from "../assests/images/1.png";
-import icon2 from "../assests/images/2.png";
-import icon3 from "../assests/images/3.png";
-import icon4 from "../assests/images/4.png";
-import icon5 from "../assests/images/5.png";
+import icon2 from "../assests/images/12.png";
+import icon3 from "../assests/images/13.png";
+import icon4 from "../assests/images/14.png";
+import icon5 from "../assests/images/15.png";
+import bday from "../assests/images/xx.png";
+import anniversary from "../assests/images/ww.png";
+import celebration from "../assests/images/yy.png";
+import Recommendation from "./recommendation";
+import Suggestion from "./suggestion";
+import { Link } from 'react-router-dom';;
 
 function Home() {
+   
     return (
         <>
   <Navbar></Navbar>
@@ -21,30 +28,34 @@ function Home() {
                     <div className="row">
                         <div className="col-sm-3">
                             <div className="eventCard">
+                            <img alt="icon" src={bday} className="bdayImg" style={{height:141,top:0}}/>
                                 <div>29 Sepetember 2021</div>
                                 <div>Mary's</div>
-                                <div><i className="fa fa-birthday-cake pr-5"></i>Birthday</div>
+                                <div><i className="fa fa-birthday-cake pdR-5"></i>Birthday</div>
                             </div>
                         </div>
                         <div className="col-sm-3">
                             <div className="eventCard">
+                            <img alt="icon" src={anniversary} className="bdayImg" style={{height:70,top:60}}/>
                                 <div>21 October 2021</div>
                                 <div>Anthony's</div>
-                                <div><i className='fa fa-gift pr-5'></i>Anniversary</div>
+                                <div><i className='fa fa-gift pdR-5'></i>Anniversary</div>
                             </div>
                         </div>
                         <div className="col-sm-3">
                             <div className="eventCard">
+                            <img alt="icon" src={bday} className="bdayImg" style={{height:141,top:0}}/>
                                 <div>15 November 2021</div>
                                 <div>Sam's</div>
-                                <div><i className="fa fa-birthday-cake pr-5"></i>Birthday</div>
+                                <div><i className="fa fa-birthday-cake pdR-5"></i>Birthday</div>
                             </div>
                         </div>
                         <div className="col-sm-3">
                             <div className="eventCard">
+                            <img alt="icon" src={celebration} className="bdayImg" style={{height:109,top:25}}/>
                                 <div>01 January 2022</div>
                                 <div>New Year's</div>
-                                <div><i className='fa fa-tree pr-5'></i>Celebration</div>
+                                <div><i className='fa fa-tree pdR-5'></i>Celebration</div>
                             </div>
                         </div>
                     </div>
@@ -54,30 +65,34 @@ function Home() {
                     <div className="row">
                         <div className="col-sm-3">
                             <div className="eventCard">
+                            <img alt="icon" src={anniversary} className="bdayImg" style={{height:70,top:60}}/>
                                 <div>15 January 2022</div>
                                 <div>Mary's</div>
-                                <div><i className='fa fa-gift pr-5'></i>Anniversary</div>
+                                <div><i className='fa fa-gift pdR-5'></i>Anniversary</div>
                             </div>
                         </div>
                         <div className="col-sm-3">
                             <div className="eventCard">
+                            <img alt="icon" src={bday} className="bdayImg" style={{height:141,top:0}}/>
                                 <div>25 March 2022</div>
                                 <div>Sam's</div>
-                                <div><i className="fa fa-birthday-cake pr-5"></i>Birthday</div>
+                                <div><i className="fa fa-birthday-cake pdR-5"></i>Birthday</div>
                             </div>
                         </div>
                         <div className="col-sm-3">
                             <div className="eventCard">
+                            <img alt="icon" src={bday} className="bdayImg" style={{height:141,top:0}}/>
                                 <div>08 April 2022</div>
                                 <div>Jack's</div>
-                                <div><i className="fa fa-birthday-cake pr-5"></i>Birthday</div>
+                                <div><i className="fa fa-birthday-cake pdR-5"></i>Birthday</div>
                             </div>
                         </div>
                         <div className="col-sm-3">
                             <div className="eventCard">
+                            <img alt="icon" src={anniversary} className="bdayImg" style={{height:70,top:60}}/>
                                 <div>01 May 2022</div>
                                 <div>Sam's</div>
-                                <div><i className='fa fa-gift pr-5'></i>Anniversary</div>
+                                <div><i className='fa fa-gift pdR-5'></i>Anniversary</div>
                             </div>
                         </div>
                     </div>
@@ -94,32 +109,45 @@ function Home() {
         <div className="sectionHeading mt-45 mb-45">Shop by category</div>
         <div className="row">
             <div className="col-sm-2 offset-sm-1">
+                <Link to ={"/category/food"}>
                 <div className="circleImg"  style={{backgroundImage: `url(${icon1})`}}>
-                    Food
+                Food
                 </div>
+                </Link>
             </div>
             <div className="col-sm-2">
-                <div className="circleImg"  style={{backgroundImage: `url(${icon2})`}}>
-                    Men's Fashion
+                <Link to ={"/category/fashion"}>
+                <div className="circleImg"  style={{backgroundImage: `url(${icon2})`}}>Fashion  
                 </div>
+                </Link>
             </div>
             <div className="col-sm-2">
-                <div className="circleImg"  style={{backgroundImage: `url(${icon3})`}}>
-                    Women's Fashion
-                </div>
-            </div>
-            <div className="col-sm-2">
-                <div className="circleImg" style={{backgroundImage: `url(${icon4})`}}>
+                 <Link to ={"/category/flowers"}>
+                <div className="circleImg" style={{backgroundImage: `url(${icon3})`}}>
                     Flowers
                 </div>
+                </Link>
             </div>
             <div className="col-sm-2" >
-                <div className="circleImg" style={{backgroundImage: `url(${icon5})`}}>
+            <Link to ={"/category/gadgets"}>
+                <div className="circleImg" style={{backgroundImage: `url(${icon4})`}}>
                     Gadgets
                 </div>
+                </Link>
+            </div>
+            <div className="col-sm-2">
+            <Link to ={"/category/accessories"}>
+                <div className="circleImg"  style={{backgroundImage: `url(${icon5})`}}>
+                    Accessories
+                </div>
+                </Link>
             </div>
         </div>
         <div className="sectionHeading mt-45 mb-45">Recommendations</div>
+        <Recommendation></Recommendation>
+        <div className="sectionHeading mt-45 mb-45">You may also like</div>
+        <Suggestion></Suggestion>
+
     </div>
 
         </>

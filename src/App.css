@@ -39,7 +39,7 @@ a {
     background: rgba(19, 35, 47, 0.9);
 }
 
-input, section {
+.loginBg section, .loginBg input[type="radio"] {
   clear: both;
   padding-top: 10px;
   display: none;
@@ -181,13 +181,13 @@ input, section {
 }
 .navbar {
     background-color: #f9a555;
-    justify-content: space-between;
+    justify-content: space-between !important;
 }
 .navbar-brand img{
-    height: 45px;
+    height: 40px;
 }
 .appTitle{
-    font-size: 28px;
+    font-size: 25px;
     color: #1a1c42;
     font-weight: 600;
     padding-left: 5px;
@@ -210,7 +210,7 @@ input, section {
     margin-bottom: 20px;
     margin-top: 20px;
 }
-.pr-5{
+.pdR-5{
     padding-right: 5px !important;
 }
 .eventCard div:first-child{
@@ -220,23 +220,20 @@ input, section {
 .eventCard .fa{
     color: #ff7c00;
 }
-.carousel-control-prev, .carousel-control-next{
-    display: none;
-}
 .carousel-indicators li{
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-    border: 2px solid #fd9735;
-}
-.pageBody{
-    padding:40px;
+    height: 10px !important;
+    width: 10px !important;
+    border-radius: 50% !important;
+    border: 2px solid #fd9735 !important;
 }
 .carousel-indicators{
-    bottom: -35px;
+    bottom: -40px !important;
 }
 .carousel-indicators .active {
-    background-color: #ffd3a9;
+    background-color: #ffd3a9 !important;
+} 
+.pageBody{
+  padding:40px;
 }
 .sectionHeading{
     font-size: 18px;
@@ -255,8 +252,8 @@ input, section {
     display: block;
     border-radius: 50%;
     background: #ffd3a9;
-    width: 90%;
-    height: 152px;
+    width: 150px;
+    height: 150px;
     background-size: 80% 80%;
     background-repeat: no-repeat;
     background-position: center;
@@ -264,6 +261,7 @@ input, section {
     cursor: pointer;
     line-height: 370px;
     margin-bottom: 45px;
+    color: #131877;
   }
   .circleImg:hover{
     transform: scale(1.08);
@@ -299,7 +297,7 @@ input, section {
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#EE5F5B), to(#BD362F));
     background-image: -webkit-linear-gradient(top, #EE5F5B, #BD362F);
     background-image: -o-linear-gradient(top, #EE5F5B, #BD362F);
-    background-image: linear-gradient(to bottom, #ec6b67, #d03e37);
+    background-image: linear-gradient(to bottom, #d03e37,#ec6b67);
     background-image: -moz-linear-gradient(top, #EE5F5B, #BD362F);
     background-repeat: repeat-x;
     border-color: #BD362F #BD362F #802420;
@@ -309,11 +307,8 @@ input, section {
     width: 110px;
 }
 .Following{
-  background-color: #1d1e42;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5BC0DE), to(#2F96B4));
-    background-image: -webkit-linear-gradient(top, #5BC0DE, #2F96B4);
-    background-image: -o-linear-gradient(top, #5BC0DE, #2F96B4);
-    background-image: linear-gradient(to bottom, #61a0ff, #42d4ff);
+    /* background-color: #1d1e42; */
+    background-image: linear-gradient(to bottom, #005a9c, #3290d5);
     background-image: -moz-linear-gradient(top, #5BC0DE, #2F96B4);
     background-repeat: repeat-x;
     border-color: #2F96B4 #2F96B4 #1F6377;
@@ -360,4 +355,135 @@ button:focus {
 }
 .pr-30{
   padding-right: 30px;
+}
+.rCard{
+  display: flex;
+  flex-direction: row;
+  width: calc(100% - 20px);
+  background: #fff7ef;
+  border: 1px solid #fac089;
+  box-shadow: 5px 5px 12px 4px #d7d7d7;
+  padding: 14px;
+  border-radius: 15px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+.rCard img{
+  height: 150px;
+  width: 140px;
+  background: #fff;
+}
+.rCardBody{
+  width: 100%;
+  padding: 20px;
+  margin: auto;
+}
+.rCardBody button{
+  width: 100%;
+  border-radius: 4px;
+  padding: 4px;
+  background: #f9a555;
+  color: #fff;
+  border-color: #eb8e32 #c46200 #be6f25;
+  margin-top: 10px;
+  border: none;
+  box-shadow: 2px 2px 8px 1px #ababab;
+}
+.iconCart{
+  padding-right: 10px;
+  font-size: 18px;
+}
+.iconRupee{
+  padding-right: 4px;
+  font-size: 20px;
+}
+.bdayImg{
+  position: absolute;
+  right: 22px;
+  top: 25px;
+}
+.appSearch{
+  display: flex;
+  margin-right: 35px;
+}
+.appSearch select{
+  width: auto;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.appSearch input{
+  border-radius: 0px;
+  background-clip: border-box;
+}
+#searchVal{
+  width: 100px;
+  display: inline-block;
+  color: #000;
+}
+#searchVal:hover{
+  text-decoration: none;
+}
+#searchVal::after{
+  position: absolute;
+  right: 5px;
+  top: 17px;
+  color: #999;
+}
+.noBorder{
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.searchUl li {
+  padding: 8px 22px;
+  cursor: pointer;
+}
+.searchUl li:hover {
+  background: #e3e3e3;
+}
+#searchBtn{
+  width: 50px;
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+  border: 1px solid #070707;
+}
+.appSearch .form-control:focus {
+  background-color: #fff;
+  border-color: transparent;
+  outline: 0;
+  box-shadow: none;
+}
+.pageBody a{
+  text-decoration: none;
+}
+.radio input{
+  display: inline-block;
+  padding-right: 22px;
+  margin-right: 5px;
+  margin-top: 10px;
+  height: 16px;
+  width: 18px;
+}
+.categoryMaultiselect .searchWrapper {
+  padding: 3px;
+}
+.categoryMaultiselect .chip {
+  background: #ababab;
+}
+.categoryMaultiselect .multiSelectContainer li:hover {
+  background: #dfdfdf;
+  color: #000;
+  cursor: pointer;
+}
+.saveBtn{
+  background: #005a9c;
+  border: none;
+  color: #fff;
+  padding: 4px 12px;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 4px;
+  float: right;
+}
+.saveBtn i{
+  font-size: 14px;
 }
