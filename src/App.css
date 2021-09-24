@@ -475,15 +475,44 @@ button:focus {
   cursor: pointer;
 }
 .saveBtn{
-  background: #005a9c;
+  background: #ffffff;
   border: none;
-  color: #fff;
-  padding: 4px 12px;
+  color: #005a9c;
+  padding: 2px 10px;
   cursor: pointer;
   margin-top: 10px;
   border-radius: 4px;
   float: right;
+  border: 1.25px solid;
 }
 .saveBtn i{
   font-size: 14px;
+}
+.addConnection{
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  background: #005a9c;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 50%;
+  color: #ffffff;
+  right: 0px;
+  border: 1px solid;
+  z-index: 98;
+  position: relative;
+  cursor: pointer;
+}
+.addText{
+  display: inline-block;
+    background: #fff;
+    padding: 3px 10px 2px 15px;
+    margin-left: -15px;
+    z-index: 98;
+    box-shadow: 2px 2px 7px 0px #999;
+    cursor: pointer;
+}
+.no-margin{
+  margin-right: 0px;
+  margin-left: 0px;
 }

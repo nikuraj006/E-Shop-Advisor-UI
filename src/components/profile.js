@@ -227,8 +227,12 @@ const handleFollow=(e)=>{
                 </div>
                </div>
                </div>
-             
-                    <div className="sectionHeading mb-30 mt-45">Connections</div>
+             <div className="row mb-30 mt-45 no-margin">
+                    <div className="col-sm-6 sectionHeading">Connections</div>
+                    <div className="col-sm-6" style={{textAlign:'right'}}>
+                        <div className="addConnection"><i className="fa fa-plus"></i></div><div className="addText">Add Connection</div>
+                    </div>
+             </div>
                     <div className="row">
                         {
                             connections.map(i => {
