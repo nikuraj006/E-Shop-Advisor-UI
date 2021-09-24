@@ -7,14 +7,37 @@ import Button from 'react-bootstrap/Button'
 
 function Profile() {
     const [show, setShow] = useState(false);
-
+    let [connectionDetail, saveConnectionDetail] = useState([]);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const likesRef = useRef();
     const dislikesRef = useRef();
+    const connectRef = useRef();
     let profile = JSON.parse(localStorage.getItem('profile'));
     const history = useHistory();
+    
+    useEffect(() => {
+        let url = "http://localhost:8080/api/v1/connection/"+profile.profileId;
+        fetch(url,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(response => response.json())
+        .then(data => {
+            if (data.length >0) {
+                let connections = [];
+                data.forEach(element => {
+                    connections.push({ icon: "/assets/2.png", name: element.firstName+" "+element.lastName, city: element.email });
+                });
+                saveConnectionDetail(connections);
+
+            }     
+        })
+ 
+    }, [])
+
     useEffect(() => {
         document.querySelectorAll(".form-control").forEach(elem => elem.disabled = true);
 
@@ -41,6 +64,29 @@ function Profile() {
     }, []);
 
 let btnValue ="Following";
+let addConnection = [];
+const getAllProfile=()=>{
+
+    let url = "http://localhost:8080/api/v1/profile/getAllProfile/"+profile.profileId;
+        fetch(url,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(response => response.json())
+        .then(data => {
+            if (data.length >0) {
+            
+                data.forEach(element => {
+                    addConnection.push({id:element.profileId, name: element.firstName+" ("+element.email+")", email: element.email},);
+                });
+                
+            }    
+        })
+
+}
+
+
 
 const handleFollow=(e)=>{
     if(e.target.textContent==='Following'){
@@ -53,13 +99,7 @@ const handleFollow=(e)=>{
 
         }
 }
-    const connections = [
-        { icon: "/assets/2.png", name: "Mary Johnson", city: "Delhi" },
-        { icon: "/assets/2.png", name: "Mary Johnson", city: "Delhi" },
-        { icon: "/assets/2.png", name: "Mary Johnson", city: "Delhi" },
-        { icon: "/assets/2.png", name: "Mary Johnson", city: "Delhi" },
-
-    ]
+    
     const category = [
         { key: "Cakes", cat: "Food" },
         { key: "Icecreams", cat: "Food" },
@@ -77,26 +117,36 @@ const handleFollow=(e)=>{
         { key: "Sunglasses", cat: "Accessories" },
         { key: "Hair Accessories", cat: "Accessories" }
       ]
-      const addConnection = [
-        { name: "Sam Curran (samcurran@gmail.com)", email: "samcurran@gmail.com"},
-        { name: "Ajit Hegde (ajit.hegde@gmail.com)", email: "ajit.hegde@gmail.com" }, 
-        { name: "Prerana Y (yprerana94@gmail.com)" , email: "yprerana94@gmail.com"},
-        { name: "Daniel Prieskel (daniel.priskel@gmail.com)", email: "daniel.priskel@gmail.com"},
-        { name: "Leegin Bernard (leegin.bernard.ts@gmail.com)", email: "leegin.bernard.ts@gmail.com"},
-        { name: "Devyani Pandey (dp11094@gmail.com)", email: "dp11094@gmail.com" }, 
-        { name: "Adtiya Gupta (adtiyeminem555@gmail.com)", email: "adtiyeminem555@gmail.com"},
-        { name: "Ashwani Chawla (ashwanichawla02@gmail.com)", email: "ashwanichawla02@gmail.com"}, 
-        { name: "Somesh Keswani (someshkeswani@gmail.com)", email: "someshkeswani@gmail.com"},
-        { name: "Anuja Khare (khareanuja98@gmail.com)", email: "khareanuja98@gmail.com"}, 
-        { name: "Lalit Keshre (lalit.keshre@gmail.com)", email: "lalit.keshre@gmail.com" },
-        { name: "Neeraj Singh (onoff50@gmail.com)", email: "onoff50@gmail.com" }, 
-        { name: "Aman Khare (amankhare94@gmail.com)", email: "amankhare94@gmail.com" },
-        { name: "Utsaw Tiwari (utsaw.tiwari97@mgail.com)", email: "utsaw.tiwari97@mgail.com" }, 
-        { name: "Tanvi Karennavar (tanvi.karennavar@gmail.com)", email: "tanvi.karennavar@gmail.com" },
-      ]
+      getAllProfile();
+      
       
     const editForm = () => {
         document.querySelectorAll(".form-control").forEach(elem => elem.disabled = false);
+    }
+    const handleAddConnection = ()=>{
+        var selectedItems = connectRef.current.getSelectedItems();
+        var payload = [];
+        selectedItems.forEach(element => {
+            payload.push({"from":{"profileId":profile.profileId},"to":{"profileId":element.id}});
+        });
+        let url = "http://localhost:8080/api/v1/connection";
+        fetch(url,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload)
+        }).then(response => response.json())
+        .then(data => {
+            if (data[0].id >0) {
+                console.log("pass");
+            }else if(data.violations.length>0){
+                console.log(data.violations[0].message);
+
+            }      
+        })  
+        handleClose();
+
     }
     let likesProducts = [];
     const constructLike=(item, index)=>{
@@ -269,7 +319,7 @@ const handleFollow=(e)=>{
              </div>
                     <div className="row">
                         {
-                            connections.map(i => {
+                            connectionDetail.map(i => {
                                 return (
                                     <div className="col-sm-6">
                                         <div className="row connectionRow">
@@ -298,17 +348,18 @@ const handleFollow=(e)=>{
                     <div className="form-group categoryMaultiselect">
                         <Multiselect
                             options={addConnection}
+                            value="value"
                             displayValue="name"
                             closeOnSelect="false"
                             placeholder="Search People"
-                            ref={dislikesRef}
+                            ref={connectRef}
                             searchable={true} 
                             // selectedValues={category}
                         />
                     </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <button className="addModelBtn" onClick={handleClose}>
+                        <button className="addModelBtn" onClick={handleAddConnection}>
                              Add
                         </button>
                     </Modal.Footer>
