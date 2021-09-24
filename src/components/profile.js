@@ -2,8 +2,15 @@ import React, { useState, useRef ,useEffect} from "react";
 import Navbar from './navBar';
 import { useHistory } from "react-router-dom";
 import Multiselect from 'multiselect-react-dropdown';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button'
 
 function Profile() {
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     const likesRef = useRef();
     const dislikesRef = useRef();
     let profile = JSON.parse(localStorage.getItem('profile'));
@@ -69,6 +76,23 @@ const handleFollow=(e)=>{
         { key: "Jewellery", cat: "Accessories" },
         { key: "Sunglasses", cat: "Accessories" },
         { key: "Hair Accessories", cat: "Accessories" }
+      ]
+      const addConnection = [
+        { name: "Sam Curran (samcurran@gmail.com)", email: "samcurran@gmail.com"},
+        { name: "Ajit Hegde (ajit.hegde@gmail.com)", email: "ajit.hegde@gmail.com" }, 
+        { name: "Prerana Y (yprerana94@gmail.com)" , email: "yprerana94@gmail.com"},
+        { name: "Daniel Prieskel (daniel.priskel@gmail.com)", email: "daniel.priskel@gmail.com"},
+        { name: "Leegin Bernard (leegin.bernard.ts@gmail.com)", email: "leegin.bernard.ts@gmail.com"},
+        { name: "Devyani Pandey (dp11094@gmail.com)", email: "dp11094@gmail.com" }, 
+        { name: "Adtiya Gupta (adtiyeminem555@gmail.com)", email: "adtiyeminem555@gmail.com"},
+        { name: "Ashwani Chawla (ashwanichawla02@gmail.com)", email: "ashwanichawla02@gmail.com"}, 
+        { name: "Somesh Keswani (someshkeswani@gmail.com)", email: "someshkeswani@gmail.com"},
+        { name: "Anuja Khare (khareanuja98@gmail.com)", email: "khareanuja98@gmail.com"}, 
+        { name: "Lalit Keshre (lalit.keshre@gmail.com)", email: "lalit.keshre@gmail.com" },
+        { name: "Neeraj Singh (onoff50@gmail.com)", email: "onoff50@gmail.com" }, 
+        { name: "Aman Khare (amankhare94@gmail.com)", email: "amankhare94@gmail.com" },
+        { name: "Utsaw Tiwari (utsaw.tiwari97@mgail.com)", email: "utsaw.tiwari97@mgail.com" }, 
+        { name: "Tanvi Karennavar (tanvi.karennavar@gmail.com)", email: "tanvi.karennavar@gmail.com" },
       ]
       
     const editForm = () => {
@@ -226,6 +250,7 @@ const handleFollow=(e)=>{
                                             closeOnSelect="false"
                                             placeholder="Select Category"
                                             ref={dislikesRef}
+                                            searchable={true} 
                                             // selectedValues={category}
                                         />
                                     </div>
@@ -236,8 +261,10 @@ const handleFollow=(e)=>{
                </div>
              <div className="row mb-30 mt-45 no-margin">
                     <div className="col-sm-6 sectionHeading">Connections</div>
-                    <div className="col-sm-6" style={{textAlign:'right'}}>
+                    <div className="col-sm-6" style={{textAlign:'right'}} >
+                    <div onClick={handleShow}>
                         <div className="addConnection"><i className="fa fa-plus"></i></div><div className="addText">Add Connection</div>
+                    </div>
                     </div>
              </div>
                     <div className="row">
@@ -262,8 +289,30 @@ const handleFollow=(e)=>{
                             })
                         }
                     </div>
-
                 </div>
+                <Modal show={show} onHide={handleClose} className="addConnectionModel" backdrop="static">
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add Connection</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                    <div className="form-group categoryMaultiselect">
+                        <Multiselect
+                            options={addConnection}
+                            displayValue="name"
+                            closeOnSelect="false"
+                            placeholder="Search People"
+                            ref={dislikesRef}
+                            searchable={true} 
+                            // selectedValues={category}
+                        />
+                    </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <button className="addModelBtn" onClick={handleClose}>
+                             Add
+                        </button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         </>
     );
