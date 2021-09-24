@@ -20,7 +20,11 @@ function Profile() {
         {
             document.getElementById("height").value=profile.height;
         }
-        // document.getElementById("like").value=profile.
+        document.getElementById("gender_Female").checked = true;
+        if(profile.gender == "Female"){
+            document.getElementById("gender_Male").checked = true;
+        }
+        // document.getElementById("like").value=profile.gender
         // document.getElementById("dislike").value=profile.
         // document.getElementById("city").value=profile.
         // document.getElementById("address").value=profile.
@@ -68,22 +72,42 @@ const handleFollow=(e)=>{
       ]
       
     const editForm = () => {
-        document.querySelectorAll(".form-control").forEach(elem => elem.disabled = true);
+        document.querySelectorAll(".form-control").forEach(elem => elem.disabled = false);
+    }
+    let likesProducts = [];
+    const constructLike=(item, index)=>{
+           let subCat ={ "subCategory":{
+                "name":item.key,
+                "category":{
+                "name":item.cat
+            }
+            }
+        }
+        likesProducts.push(subCat);
+    }
+    
+    let disLikesProducts = [];
+    const constructDisLike=(item, index)=>{
+           var subCat ={ "subCategory":{
+                "name":item.key,
+                "category":{
+                "name":item.cat
+            }
+            }
+        }
+        disLikesProducts.push(subCat);
     }
     const handleSave=()=>{
         let likes = likesRef.current.getSelectedItems();
         let disLikes = dislikesRef.current.getSelectedItems();
-        console.log(likes, disLikes);
-    }
-    const save= ()=>{
-
+        likes.forEach(constructLike);
+        disLikes.forEach(constructDisLike);
+          
         let fname = document.getElementById("fname").value;
         let email = document.getElementById("email").value;
         let dob = document.getElementById("dob").value;   
         let height = document.getElementById("height").value;   
-        // let dob = document.getElementById("dob").value;   
-        // let dob = document.getElementById("dob").value;   
-        // let dob = document.getElementById("dob").value; 
+        let gender = document.querySelector('input[name="gender"]:checked').value; 
         let url = "http://localhost:8080/api/v1/profile/"+profile.profileId;
         fetch(url,{
             method: 'PUT',
@@ -96,30 +120,10 @@ const handleFollow=(e)=>{
                     "firstName":fname,
                     "lastName":profile.lastName,
                     "dateOfBirth":dob,
-                    "gender":null,
+                    "gender":gender,
                     "height": height,
-                    "likesList":[{
-                        "subCategory":{
-                            "name":"",
-                            "category":{
-                            "name":""
-                        }
-                        }
-                    },
-                    {
-                            "category":{
-                            "name":""
-                        }
-                    }
-                    ],
-                    "dislikesList":[{
-                        "subCategory":{
-                            "name":"",
-                            "category":{
-                            "name":""
-                        }
-                        }
-                    }]
+                    "likesList":likesProducts,
+                    "dislikesList":disLikesProducts
                 }
             )
         }).then(response => response.json())
@@ -178,28 +182,28 @@ const handleFollow=(e)=>{
                         </div>
                     </div>
                     <div className="col-sm-6">
-                        <div className="form-group radio">
+                        <div className="form-group radio ">
                             <label style={{ display: 'block' }}>Gender:</label>
-                            <input type="radio" name="gender" id="gender_Male" />Male
-                            <input type="radio" style={{ marginLeft: 20 }} name="gender" id="gender_Female" />Female
+                            <input type="radio" className="form-control" name="gender" id="gender_Male" value="Male"/>Male
+                            <input type="radio"className="form-control"  style={{ marginLeft: 20 }} name="gender" value="Female" id="gender_Female" />Female
                         </div>
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
                             <label>Height:</label>
-                            <input type="number" className="form-control" id="fHeight" placeholder="Enter Height" />
+                            <input type="number" className="form-control" id="height" placeholder="Enter Height" />
                         </div>
                     </div>
                     <div className="col-sm-6">
                         <div className="form-group">
                             <label>Weight:</label>
-                            <input type="number" className="form-control" id="fHeight" placeholder="Enter Weight" />
+                            <input type="number" className="form-control" id="weight" placeholder="Enter Weight" />
                         </div>
                     </div>
                     <div className="col-sm-6">
                                     <div className="form-group categoryMaultiselect">
                                         <label>Likes:</label>
-                                        <Multiselect
+                                        <Multiselect 
                                             displayValue="key"
                                             groupBy="cat"
                                             options={category}
