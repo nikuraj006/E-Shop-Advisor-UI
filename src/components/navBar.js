@@ -1,9 +1,10 @@
 import logo from "../assests/images/logo.png";
 import Profile from "./profile";
 import {Link} from "react-router-dom";
+import { useEffect, useState } from 'react';
 
 function Navbar() {
-
+    let [searchDetail, saveSearchDetail] = useState([]);
     const handleSelect=(e)=>{
         let value = e.target.innerText;
         document.getElementById("searchVal").innerText =value;
@@ -11,7 +12,21 @@ function Navbar() {
     const handleSearch=()=>{
         let category =  document.getElementById("searchVal").innerText;
         let search = document.getElementById("appSearch").value;
+        
     }
+
+    useEffect(() => {
+        // fetch('url' + type + '/', {
+        //     method: 'GET',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     }
+        // }).then(response => response.json())
+        //     .then(data => {
+        //         // saveSearchDetail(data)
+        //     })
+
+    }, [])
     return (
         <nav className="navbar navbar-expand-sm">
         <a className="navbar-brand" href="/home">
@@ -32,30 +47,29 @@ function Navbar() {
                     <li>Gadget</li>
                     <li>Accessories</li>
                 </ul>
+                {/* <ul className="dropdown-menu searchUl" role="listbox" onClick={handleSelect}>
+                    {
+                        searchDetail.map(item=>{
+                            return(
+                                <li value={item.value}>
+                                    {item.name}
+                                </li>
+                            )
+                        })
+                    }
+                </ul> */}
              </li>
         <input id="appSearch" class="form-control" type="text" placeholder="Search"/>
-        <button id="searchBtn" className="form-control"><i className="fa fa-search" onClick={handleSearch}></i></button>
+        <Link to="/search"><button id="searchBtn" className="form-control"><i className="fa fa-search" onClick={handleSearch}></i></button></Link>
             </div>
         <ul className="navbar-nav">
-            <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Buddies
-                </a>
-                <div className="dropdown-menu">
-                    <a className="dropdown-item" href="#">Sam</a>
-                    <a className="dropdown-item" href="#">Anthony</a>
-                    <a className="dropdown-item" href="#">Jack</a>
-                    <a className="dropdown-item" href="#">Mary</a>
-                </div>
-            </li>
-
             <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                     Profile
                 </a>
                 <div className="dropdown-menu">
                     <Link className="dropdown-item" to="/profile">Account</Link>
-                    <Link className="dropdown-item" to="/myOrder">My Order</Link>
+                    <Link className="dropdown-item" to="/myOrder">My Orders</Link>
                     <Link className="dropdown-item" to="/">Log Out</Link>
                 </div>
             </li>

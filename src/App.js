@@ -5,6 +5,7 @@ import Profile from './components/profile';
 import {Route, BrowserRouter as Router} from 'react-router-dom';
 import MyOrder from './components/myOrder';
 import Category from './components/category';
+import Search from './components/search';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
     <Route exact path ="/profile" component={Profile}/>
     <Route exact path ="/myOrder" component={MyOrder}/> 
     <Route exact path="/category/:type" component={Category}/>
+    <Route exact path="/search" component={Search}/>
   </Router>
   );
 }
