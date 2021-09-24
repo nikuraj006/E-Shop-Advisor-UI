@@ -8,20 +8,23 @@ function Profile() {
     let profile = JSON.parse(localStorage.getItem('profile'));
     const history = useHistory();
     useEffect(() => {
-        // document.querySelectorAll(".form-control").forEach(elem => elem.disabled = true);
+        document.querySelectorAll(".form-control").forEach(elem => elem.disabled = true);
 
-        // document.getElementById("fname").value=profile.firstName;
-        // document.getElementById("email").value=profile.email;
-        // if(profile.dateOfBirth != null){
-        //     document.getElementById("dob").value=profile.dateOfBirth.split('T')[0];
-        // }
-        // document.getElementById("height").value=profile.height;
-        // // document.getElementById("like").value=profile.
-        // // document.getElementById("dislike").value=profile.
-        // // document.getElementById("city").value=profile.
-        // // document.getElementById("address").value=profile.
-        // document.getElementById("e-mail").innerHTML=profile.email;
-        // document.getElementById("fulll-name").innerHTML=profile.firstName + " " +profile.lastName;
+        document.getElementById("fname").value=profile.firstName;
+        document.getElementById("email").value=profile.email;
+        if(profile.dateOfBirth != null){
+            document.getElementById("dob").value=profile.dateOfBirth.split('T')[0];
+        }
+        if(profile.height != null)
+        {
+            document.getElementById("height").value=profile.height;
+        }
+        // document.getElementById("like").value=profile.
+        // document.getElementById("dislike").value=profile.
+        // document.getElementById("city").value=profile.
+        // document.getElementById("address").value=profile.
+        document.getElementById("e-mail").innerHTML=profile.email;
+        document.getElementById("fulll-name").innerHTML=profile.firstName + " " +profile.lastName;
 
     }, []);
 
