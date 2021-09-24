@@ -1,7 +1,10 @@
 import Navbar from './navBar';
+import Profile from "./profile";
 import { useEffect, useState } from 'react';
 
 function Search(){
+    let profileId =  document.getElementById("searchVal").innerText;
+    let searchToBe = document.getElementById("appSearch").value;
 
     let [searchDetail, saveSearchDetail] = useState([]);
 const search=[
@@ -17,15 +20,25 @@ const search=[
 
 
     useEffect(() => {
-        // fetch('url' + type + '/', {
-        //     method: 'GET',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     }
-        // }).then(response => response.json())
-        //     .then(data => {
-        //         // saveCategoryDetail(data)
-        //     })
+        let url = "http://localhost:8080/api/v1/recommendation/"
+        fetch(url,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                {
+                 "ProfileId":profileId,
+                 "searchInput": searchToBe
+                }
+                
+            )
+        }).then(response => response.json())
+        .then(data => {
+            saveSearchDetail(data)
+            
+        })
+    
         saveSearchDetail(search)
 
     }, [])

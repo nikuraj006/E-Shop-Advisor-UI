@@ -4,29 +4,48 @@ import {Link} from "react-router-dom";
 import { useEffect, useState } from 'react';
 
 function Navbar() {
+    let profile = JSON.parse(localStorage.getItem('profile'));
     let [searchDetail, saveSearchDetail] = useState([]);
+    useEffect(() => {
+        let url= "http://localhost:8080/api/v1/connection/" +profile.profileId
+        fetch(url,{
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then(response => response.json())
+        .then(data => {
+                saveSearchDetail(data)
+                console.log(data);
+        })
+    }, [])
     const handleSelect=(e)=>{
         let value = e.target.innerText;
-        document.getElementById("searchVal").innerText =value;
+        document.getElementById("searchVal").innerText =value;  
+   
     }
     const handleSearch=()=>{
-        let category =  document.getElementById("searchVal").innerText;
+        let profileId =  document.getElementById("searchVal").innerText;
         let search = document.getElementById("appSearch").value;
+        let url = "http://localhost:8080/api/v1/recommendation/"
+        fetch(url,{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(
+                {
+                 "ProfileId":profileId,
+                 "searchInput": search
+                }
+                
+            )
+        }).then(response => response.json())
+        .then(data => {
+            
+        })
         
     }
-
-    useEffect(() => {
-        // fetch('url' + type + '/', {
-        //     method: 'GET',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     }
-        // }).then(response => response.json())
-        //     .then(data => {
-        //         // saveSearchDetail(data)
-        //     })
-
-    }, [])
     return (
         <nav className="navbar navbar-expand-sm">
         <a className="navbar-brand" href="/home">
@@ -41,11 +60,19 @@ function Navbar() {
                 </a>
                    <b class="caret"></b>
                 <ul className="dropdown-menu searchUl" role="listbox" onClick={handleSelect}>
-                    <li>Food</li>
+                 { searchDetail.map(item=>{
+                            return(
+                                <li value={item.profileId}>
+                                    {item.firstName}
+                                </li>
+                            )
+                        })
+                    }
+                  {/*  <li>Food</li>
                     <li>Fashion</li>
                     <li>Flower</li>
                     <li>Gadget</li>
-                    <li>Accessories</li>
+                  <li>Accessories</li>*/}
                 </ul>
                 {/* <ul className="dropdown-menu searchUl" role="listbox" onClick={handleSelect}>
                     {
