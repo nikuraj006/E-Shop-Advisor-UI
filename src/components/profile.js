@@ -4,7 +4,8 @@ import { useHistory } from "react-router-dom";
 import Multiselect from 'multiselect-react-dropdown';
 
 function Profile() {
-    const formRef = useRef()
+    const likesRef = useRef();
+    const dislikesRef = useRef();
     let profile = JSON.parse(localStorage.getItem('profile'));
     const history = useHistory();
     useEffect(() => {
@@ -70,7 +71,9 @@ const handleFollow=(e)=>{
         document.querySelectorAll(".form-control").forEach(elem => elem.disabled = true);
     }
     const handleSave=()=>{
-        let selectedCategory = formRef.current.getSelectedItems();
+        let likes = likesRef.current.getSelectedItems();
+        let disLikes = dislikesRef.current.getSelectedItems();
+        console.log(likes, disLikes);
     }
     const save= ()=>{
 
@@ -188,8 +191,14 @@ const handleFollow=(e)=>{
                         </div>
                     </div>
                     <div className="col-sm-6">
+                        <div className="form-group">
+                            <label>Weight:</label>
+                            <input type="number" className="form-control" id="fHeight" placeholder="Enter Weight" />
+                        </div>
+                    </div>
+                    <div className="col-sm-6">
                                     <div className="form-group categoryMaultiselect">
-                                        <label>Category:</label>
+                                        <label>Likes:</label>
                                         <Multiselect
                                             displayValue="key"
                                             groupBy="cat"
@@ -197,7 +206,22 @@ const handleFollow=(e)=>{
                                             showCheckbox
                                             closeOnSelect="false"
                                             placeholder="Select Category"
-                                            ref={formRef}
+                                            ref={likesRef}
+                                            // selectedValues={category}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="col-sm-6">
+                                    <div className="form-group categoryMaultiselect">
+                                        <label>Dislikes:</label>
+                                        <Multiselect
+                                            displayValue="key"
+                                            groupBy="cat"
+                                            options={category}
+                                            showCheckbox
+                                            closeOnSelect="false"
+                                            placeholder="Select Category"
+                                            ref={dislikesRef}
                                             // selectedValues={category}
                                         />
                                     </div>
