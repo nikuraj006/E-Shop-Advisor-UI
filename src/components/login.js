@@ -10,20 +10,84 @@ const handleLogin= ()=>{
     history.push("/home");
         let email = document.getElementById("Lemail").value;
         let password = document.getElementById("Lpassword").value;
-    
-        fetch('url',{
+        if(email!= "" && password != ""){
+            let url = "http://localhost:8080/api/v1/profile/"+email
+            fetch(url,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            }).then(response => response.json())
+            .then(data => {
+                if (data.profileId != undefined) {
+                    localStorage.setItem('profile', JSON.stringify(data));
+                    history.push("/home");
+                }else if(data.violations.length>0){
+                    console.log(data.violations[0].message);
+
+                }         
+            })
+        }else{
+            console.log("enter userid/pwd");
+        }
+}
+
+const handleSignUp= ()=>{
+
+    let fname = document.getElementById("fname").value;
+    let lname = document.getElementById("lname").value;    
+    let email = document.getElementById("email").value;    
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+    if(password == confirmPassword){
+        let url = "http://localhost:8080/api/v1/profile/";
+        fetch(url,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ "email": email, "password": password })
+            body: JSON.stringify(
+                {
+                    "email":email,
+                    "firstName":fname,
+                    "lastName":lname,
+                    "dateOfBirth":null,
+                    "gender":null,
+                    "likesList":[{
+                        "subCategory":{
+                            "name":"",
+                            "category":{
+                            "name":""
+                        }
+                        }
+                    },
+                    {
+                            "category":{
+                            "name":""
+                        }
+                    }
+                    ],
+                    "dislikesList":[{
+                        "subCategory":{
+                            "name":"",
+                            "category":{
+                            "name":""
+                        }
+                        }
+                    }]
+                }
+            )
         }).then(response => response.json())
         .then(data => {
-            if (data.message === "SUCCESS") {
+            if (data.profileId != undefined) {
+                localStorage.setItem('profile', JSON.stringify(data));
                 history.push("/home");
-            }
-         
-    })
+            }else if(data.violations.length>0){
+                console.log(data.violations[0].message);
+
+            }      
+        })
+    }
 
 }
 
@@ -106,7 +170,7 @@ const handleLogin= ()=>{
                                 </div>
                             </div>
                             <div className="col-sm-12">
-                                <button className="loginBtn">GET STARTED</button>
+                                <button className="loginBtn" onClick={handleSignUp}> GET STARTED</button>
                             </div>
                         </div>
                 </section>
