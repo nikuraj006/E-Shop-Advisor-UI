@@ -1,10 +1,12 @@
 import Navbar from './navBar';
 import Profile from "./profile";
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 
 function Search(){
     let profileId =  document.getElementById("searchVal").innerText;
     let searchToBe = document.getElementById("appSearch").value;
+    const { people,query } = useParams();
 
     let [searchDetail, saveSearchDetail] = useState([]);
 const search=[
@@ -28,8 +30,8 @@ const search=[
             },
             body: JSON.stringify(
                 {
-                 "ProfileId":profileId,
-                 "searchInput": searchToBe
+                 "ProfileId":people,
+                 "searchInput": query
                 }
                 
             )
