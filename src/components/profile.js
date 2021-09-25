@@ -107,7 +107,7 @@ const handleFollow=(e)=>{
         { key: "Sweets", cat: "Food" },
         { key: "Western", cat: "Fashion" },
         { key: "Ethnic", cat: "Fashion" },
-        { key: "Rose", cat: "Flowers" },
+        { key: "Roses", cat: "Flowers" },
         { key: "Tulips", cat: "Flowers" },
         { key: "Orchids", cat: "Flowers" },
         { key: "Mobiles", cat: "Gadgets" },

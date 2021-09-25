@@ -52,28 +52,7 @@ const handleSignUp= ()=>{
                     "lastName":lname,
                     "dateOfBirth":null,
                     "gender":null,
-                    "likesList":[{
-                        "subCategory":{
-                            "name":"",
-                            "category":{
-                            "name":""
-                        }
-                        }
-                    },
-                    {
-                            "category":{
-                            "name":""
-                        }
-                    }
-                    ],
-                    "dislikesList":[{
-                        "subCategory":{
-                            "name":"",
-                            "category":{
-                            "name":""
-                        }
-                        }
-                    }]
+                    
                 }
             )
         }).then(response => response.json())
@@ -81,9 +60,6 @@ const handleSignUp= ()=>{
             if (data.profileId != undefined) {
                 localStorage.setItem('profile', JSON.stringify(data));
                 history.push("/home");
-            }else if(data.violations.length>0){
-                console.log(data.violations[0].message);
-
             }      
         })
     }
