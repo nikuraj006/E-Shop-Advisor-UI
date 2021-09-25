@@ -94,14 +94,14 @@ const handleSignUp= ()=>{
   return (
     <div className="loginBg">
     <div className="row">
-        <div className="col-sm-6" style={{margin: 'auto',padding: '0px 35px'}}>
+        <div className="col-sm-7" style={{margin: 'auto',padding: '0px 35px'}}>
             <img alt="logo" src={logo} className="mb-25" style={{width:125}}/>
             <div className="header">E-Shop Advisor</div>
             <div className="loginBody">
                 An E-store with automated product recommendation for users and their connections based on their
                 likes and dislikes with least human effort of filter selection. </div>
         </div>
-        <div className="col-sm-6" style= {{ padding:'0px 20px'}}>
+        <div className="col-sm-5" style= {{ padding:'0px 20px'}}>
             <div className="tab_container">
                 <input id="tab1" type="radio" name="tabs" checked/>
                 <label className="loginLabel" for="tab1"><span>Log In</span></label>

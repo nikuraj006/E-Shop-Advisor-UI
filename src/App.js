@@ -15,7 +15,7 @@ function App() {
     <Route exact path ="/profile" component={Profile}/>
     <Route exact path ="/myOrder" component={MyOrder}/> 
     <Route exact path="/category/:type" component={Category}/>
-    <Route exact path="/search" component={Search}/>
+    <Route exact path="/search/:people/:query" component={Search}/>
   </Router>
   );
 }
