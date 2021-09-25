@@ -2,10 +2,12 @@ import logo from "../assests/images/logo.png";
 import Profile from "./profile";
 import {Link} from "react-router-dom";
 import { useEffect, useState } from 'react';
+import { useHistory } from "react-router-dom";
 
 function Navbar() {
     let profile = JSON.parse(localStorage.getItem('profile'));
     let [searchDetail, saveSearchDetail] = useState([]);
+    const history = useHistory();
     useEffect(() => {
         let url= "http://localhost:8080/api/v1/connection/" +profile.profileId
         fetch(url,{
@@ -27,23 +29,26 @@ function Navbar() {
     const handleSearch=()=>{
         let profileId =  document.getElementById("searchVal").innerText;
         let search = document.getElementById("appSearch").value;
-        let url = "http://localhost:8080/api/v1/recommendation/"
-        fetch(url,{
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(
-                {
-                 "ProfileId":profileId,
-                 "searchInput": search
-                }
+        // let url = "http://localhost:8080/api/v1/recommendation/"
+        // fetch(url,{
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(
+        //         {
+        //          "ProfileId":profileId,
+        //          "searchInput": search
+        //         }
                 
-            )
-        }).then(response => response.json())
-        .then(data => {
+        //     )
+        // }).then(response => response.json())
+        // .then(data => {
             
-        })
+        // })
+        if(profileId && search){
+            history.push(`/search/${profileId}/${search}`);
+        }
         
     }
     return (
@@ -87,7 +92,7 @@ function Navbar() {
                 </ul> */}
              </li>
         <input id="appSearch" class="form-control" type="text" placeholder="Search"/>
-        <Link to="/search"><button id="searchBtn" className="form-control"><i className="fa fa-search" onClick={handleSearch}></i></button></Link>
+        <button id="searchBtn" className="form-control"><i className="fa fa-search" onClick={handleSearch}></i></button>
             </div>
         <ul className="navbar-nav">
             <li className="nav-item dropdown">
