@@ -29,7 +29,7 @@ function Profile() {
             if (data.length >0) {
                 let connections = [];
                 data.forEach(element => {
-                    connections.push({ icon: "/assets/2.png", name: element.firstName+" "+element.lastName, city: element.email });
+                    connections.push({ icon: "https://bootdey.com/img/Content/avatar/avatar7.png", name: element.firstName+" "+element.lastName, city: element.email });
                 });
                 saveConnectionDetail(connections);
 

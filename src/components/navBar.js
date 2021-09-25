@@ -27,25 +27,9 @@ function Navbar() {
    
     }
     const handleSearch=()=>{
-        let profileId =  document.getElementById("searchVal").innerText;
+        let profileId =  document.querySelector(".searchUl li").attributes.value.textContent;
         let search = document.getElementById("appSearch").value;
-        // let url = "http://localhost:8080/api/v1/recommendation/"
-        // fetch(url,{
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(
-        //         {
-        //          "profileId":profileId,
-        //          "searchInput": search
-        //         }
-                
-        //     )
-        // }).then(response => response.json())
-        // .then(data => {
-            
-        // })
+
         if(profileId && search){
             history.push(`/search/${profileId}/${search}`);
         }
@@ -60,7 +44,7 @@ function Navbar() {
         <div style={{display:'flex'}}>
         <div className="appSearch">
         <li className="dropdown form-control noBorder" style={{width:'auto'}}>
-                <a href="#lala" className="dropdown-toggle" data-toggle="dropdown" id="searchVal" >
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown" id="searchVal" >
                    All 
                 </a>
                    <b class="caret"></b>

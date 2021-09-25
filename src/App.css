@@ -444,7 +444,7 @@ button:focus {
   width: 50px;
   border-bottom-left-radius: 0px;
   border-top-left-radius: 0px;
-  border: 1px solid #070707;
+  /* border: 1px solid #070707; */
 }
 .appSearch .form-control:focus {
   background-color: #fff;

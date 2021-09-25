@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
 function Search(){
-    let profileId =  document.getElementById("searchVal").innerText;
-    let searchToBe = document.getElementById("appSearch").value;
+   
     const { people,query } = useParams();
 
     let [searchDetail, saveSearchDetail] = useState([]);
@@ -37,19 +36,21 @@ const search=[
             )
         }).then(response => response.json())
         .then(data => {
-            let results = [];
-            results.push(data.likes);
-            results.push(data.general);
-
+            var results = [];
+            var general = data.general;
+            var likes = data.likes;
+            results = likes.concat(general);
             saveSearchDetail(results)
             
+        }).catch(error=>{
+            console.log(error);
+            var results = [];
+            saveSearchDetail(results)
         })
     
-        saveSearchDetail(search)
+        // saveSearchDetail(search)
 
-    }, [])
-
-
+    }, [people,query])
 
     return(
         <>
@@ -57,15 +58,17 @@ const search=[
           <div className="pageBody">
         <div className="sectionHeading" style={{marginBottom:40}}>Search Results:</div>
         <div className="row">
+
             {
+                searchDetail.length!==0 ?
                 searchDetail.map(item=>{
                     return(
                         <div className="col-sm-4">
                              <div className="categoryCard">
                             <div>
-                                <img alt="icon" src={item.image}/>                              
+                                <img alt="icon" src={item.imgUrl}/>                              
                             </div>
-                                <div className="pd-20">{item.name}</div>
+                                <div className="pd-20">{item.displayName}</div>
                             <div className="categoryCardBody">
                                 <div className="row no-margin text-center">
                                 <div className="col-sm-6" style={{fontSize:18,padding:20,borderRight:'1px solid #bbb'}}><i class="fa fa-rupee iconRupee"></i>{item.price}</div>
@@ -75,7 +78,11 @@ const search=[
                         </div>
                         </div>
                     )
-                })
+                }):
+                <div style={{padding:30,textAlign:'center',width:'100%'}}>
+                    <h5>No results found.</h5>
+                        <p>Try checking your spelling or use more general terms</p>
+                </div>
             }
             <div className="col-sm-4">
 
