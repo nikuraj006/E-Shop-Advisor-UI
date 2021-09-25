@@ -7,7 +7,6 @@ function Login() {
 const history = useHistory();
 
 const handleLogin= ()=>{
-    history.push("/home");
         let email = document.getElementById("Lemail").value;
         let password = document.getElementById("Lpassword").value;
         if(email!= "" && password != ""){
