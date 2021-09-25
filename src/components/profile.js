@@ -40,6 +40,9 @@ function Profile() {
 
     useEffect(() => {
         document.querySelectorAll(".form-control").forEach(elem => elem.disabled = true);
+        document.getElementById("appSearch").disabled=false
+        document.getElementById("searchBtn").disabled=false
+        document.getElementById("saveBtn").disabled=true;
 
         document.getElementById("fname").value=profile.firstName;
         document.getElementById("email").value=profile.email;
@@ -51,10 +54,10 @@ function Profile() {
             document.getElementById("height").value=profile.height;
         }
         document.getElementById("gender_Female").checked = true;
-        if(profile.gender == "Female"){
+        if(profile.gender == "male"){
             document.getElementById("gender_Male").checked = true;
         }
-        // document.getElementById("like").value=profile.gender
+        document.getElementById("weight").value=profile.w
         // document.getElementById("dislike").value=profile.
         // document.getElementById("city").value=profile.
         // document.getElementById("address").value=profile.
@@ -122,6 +125,8 @@ const handleFollow=(e)=>{
       
     const editForm = () => {
         document.querySelectorAll(".form-control").forEach(elem => elem.disabled = false);
+        document.getElementById("saveBtn").disabled=false;
+        
     }
     const handleAddConnection = ()=>{
         var selectedItems = connectRef.current.getSelectedItems();
@@ -204,7 +209,7 @@ const handleFollow=(e)=>{
         .then(data => {
             if (data.profileId != undefined) {
                 localStorage.setItem('profile', JSON.stringify(data));
-                history.push("/profile");
+                history.push("/home");
             }else if(data.violations.length>0){
                 console.log(data.violations[0].message);
 
@@ -258,8 +263,8 @@ const handleFollow=(e)=>{
                     <div className="col-sm-6">
                         <div className="form-group radio ">
                             <label style={{ display: 'block' }}>Gender:</label>
-                            <input type="radio" className="form-control" name="gender" id="gender_Male" value="Male"/>Male
-                            <input type="radio"className="form-control"  style={{ marginLeft: 20 }} name="gender" value="Female" id="gender_Female" />Female
+                            <input type="radio" className="form-control" name="gender" id="gender_Male" value="male"/>Male
+                            <input type="radio"className="form-control"  style={{ marginLeft: 20 }} name="gender" value="female" id="gender_Female" />Female
                         </div>
                     </div>
                     <div className="col-sm-6">
@@ -282,7 +287,7 @@ const handleFollow=(e)=>{
                                             groupBy="cat"
                                             options={category}
                                             showCheckbox
-                                            closeOnSelect="false"
+                                            closeOnSelect="true"
                                             placeholder="Select Category"
                                             ref={likesRef}
                                             // selectedValues={category}
@@ -297,15 +302,15 @@ const handleFollow=(e)=>{
                                             groupBy="cat"
                                             options={category}
                                             showCheckbox
-                                            closeOnSelect="false"
+                                            closeOnSelect="true"
                                             placeholder="Select Category"
                                             ref={dislikesRef}
-                                            searchable={true} 
+                                            // searchable={true} 
                                             // selectedValues={category}
                                         />
                                     </div>
                                 </div>
-                    <div className="col-sm-12"><button onClick={handleSave} className="saveBtn"><i class="fa fa-check"></i> Save</button></div>
+                    <div className="col-sm-12"><button onClick={handleSave} className="saveBtn" id="saveBtn"><i class="fa fa-check"></i> Save</button></div>
                 </div>
                </div>
                </div>

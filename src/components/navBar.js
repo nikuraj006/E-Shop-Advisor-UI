@@ -37,7 +37,7 @@ function Navbar() {
         //     },
         //     body: JSON.stringify(
         //         {
-        //          "ProfileId":profileId,
+        //          "profileId":profileId,
         //          "searchInput": search
         //         }
                 

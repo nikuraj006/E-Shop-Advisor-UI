@@ -30,14 +30,18 @@ const search=[
             },
             body: JSON.stringify(
                 {
-                 "ProfileId":people,
+                 "profileId":people,
                  "searchInput": query
                 }
                 
             )
         }).then(response => response.json())
         .then(data => {
-            saveSearchDetail(data)
+            let results = [];
+            results.push(data.likes);
+            results.push(data.general);
+
+            saveSearchDetail(results)
             
         })
     
