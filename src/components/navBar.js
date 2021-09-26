@@ -8,6 +8,7 @@ function Navbar() {
     let profile = JSON.parse(localStorage.getItem('profile'));
     let [searchDetail, saveSearchDetail] = useState([]);
     const history = useHistory();
+    let selectedProfileId=profile.profileId;
     useEffect(() => {
         let url= "http://localhost:8080/api/v1/connection/" +profile.profileId
         fetch(url,{
@@ -23,11 +24,12 @@ function Navbar() {
     }, [])
     const handleSelect=(e)=>{
         let value = e.target.innerText;
-        document.getElementById("searchVal").innerText =value;  
+        document.getElementById("searchVal").innerText =value; 
+        selectedProfileId = e.target.id; 
    
     }
     const handleSearch=()=>{
-        let profileId = profile.profileId;
+        let profileId = selectedProfileId;
         try{
             profileId =  document.querySelector(".searchUl li").attributes.value.textContent;
         }catch(e){           
@@ -35,7 +37,7 @@ function Navbar() {
         let search = document.getElementById("appSearch").value;
 
         if(profileId && search){
-            history.push(`/search/${profileId}/${search}`);
+            history.push(`/search/${selectedProfileId}/${search}`);
         }
         
     }
