@@ -2,8 +2,9 @@
 import Carousel from 'react-bootstrap/Carousel'
 function Suggestion() {
     let recommendation = JSON.parse(localStorage.getItem('general'));
-
+   
     let menuItem= [];
+    if(recommendation !== null){
     for(var item=0; item<recommendation.length;item=item+3){
         try{
             menuItem.push(
@@ -51,6 +52,7 @@ function Suggestion() {
             )
         }catch(e){  }
     }
+}
 
     return(
         <>

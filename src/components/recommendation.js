@@ -5,6 +5,7 @@ function Recommendation() {
     let recommendation = JSON.parse(localStorage.getItem('likes'));
 
     let menuItem= [];
+    if(recommendation !== null){
     for(var item=0; item<recommendation.length;item=item+3){
         try{
             menuItem.push(
@@ -50,8 +51,10 @@ function Recommendation() {
                     </Carousel.Item>
 
             )
+    
         }catch(e){}
     }
+}
 
     return(
         <>
