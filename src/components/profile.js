@@ -54,7 +54,7 @@ function Profile() {
             document.getElementById("height").value=profile.height;
         }
         document.getElementById("gender_Female").checked = true;
-        if(profile.gender == "male"){
+        if(profile.gender == "M"){
             document.getElementById("gender_Male").checked = true;
         }
         document.getElementById("weight").value=profile.w
@@ -144,6 +144,7 @@ const handleFollow=(e)=>{
         }).then(response => response.json())
         .then(data => {
             if (data[0].id >0) {
+                window.location.reload();
                 console.log("pass");
             }else if(data.violations.length>0){
                 console.log(data.violations[0].message);

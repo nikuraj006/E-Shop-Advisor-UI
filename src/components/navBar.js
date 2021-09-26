@@ -27,7 +27,11 @@ function Navbar() {
    
     }
     const handleSearch=()=>{
-        let profileId =  document.querySelector(".searchUl li").attributes.value.textContent;
+        let profileId = profile.profileId;
+        try{
+            profileId =  document.querySelector(".searchUl li").attributes.value.textContent;
+        }catch(e){           
+        }
         let search = document.getElementById("appSearch").value;
 
         if(profileId && search){
@@ -45,13 +49,13 @@ function Navbar() {
         <div className="appSearch">
         <li className="dropdown form-control noBorder" style={{width:'auto'}}>
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" id="searchVal" >
-                   All 
+                   MySelf 
                 </a>
                    <b class="caret"></b>
                 <ul className="dropdown-menu searchUl" role="listbox" onClick={handleSelect}>
                  { searchDetail.map(item=>{
                             return(
-                                <li value={item.profileId}>
+                                <li id={item.profileId}>
                                     {item.firstName}
                                 </li>
                             )

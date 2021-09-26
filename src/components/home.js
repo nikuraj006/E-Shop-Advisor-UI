@@ -12,7 +12,26 @@ import Suggestion from "./suggestion";
 import { Link } from 'react-router-dom';;
 
 function Home() {
-   
+    let profile = JSON.parse(localStorage.getItem('profile'));
+    const itemsLoad = ()=>{
+        let url = "http://localhost:8080/api/v1/recommendation/"+profile.profileId;
+            fetch(url,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then(response => response.json())
+            .then(data => {
+                var general = data.general;
+                var likes = data.likes;
+                localStorage.setItem('general', JSON.stringify(general));
+                localStorage.setItem('likes', JSON.stringify(likes));
+                
+            }).catch(error=>{
+                console.log(error);
+            })
+    }
+    itemsLoad();
     return (
         <>
   <Navbar></Navbar>
