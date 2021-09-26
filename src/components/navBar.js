@@ -51,7 +51,7 @@ function Navbar() {
         <div className="appSearch">
         <li className="dropdown form-control noBorder" style={{width:'auto'}}>
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" id="searchVal" >
-                   MySelf 
+                   Self 
                 </a>
                    <b class="caret"></b>
                 <ul className="dropdown-menu searchUl" role="listbox" onClick={handleSelect}>

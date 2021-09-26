@@ -210,7 +210,7 @@ const handleFollow=(e)=>{
         .then(data => {
             if (data.profileId != undefined) {
                 localStorage.setItem('profile', JSON.stringify(data));
-                history.push("/home");
+                window.location.reload();
             }else if(data.violations.length>0){
                 console.log(data.violations[0].message);
 
