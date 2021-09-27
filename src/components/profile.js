@@ -290,7 +290,7 @@ const handleFollow=(e)=>{
                                             closeOnSelect="true"
                                             placeholder="Select Category"
                                             ref={likesRef}
-                                            selectedValues={profile.likesList.filter(i=>i.name!=null)}
+                                            selectedValues={profile.likesList?.filter(i=>i.name!=null)}
                                         />
                                     </div>
                                 </div>
@@ -306,7 +306,7 @@ const handleFollow=(e)=>{
                                             placeholder="Select Category"
                                             ref={dislikesRef}
                                             // searchable={true} 
-                                            selectedValues={profile.dislikesList.filter(i=>i.name!=null)}
+                                            selectedValues={profile.dislikesList?.filter(i=>i.name!=null)}
                                         />
                                     </div>
                                 </div>
