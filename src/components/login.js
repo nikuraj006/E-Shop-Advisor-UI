@@ -59,7 +59,7 @@ const handleSignUp= ()=>{
         .then(data => {
             if (data.profileId != undefined) {
                 localStorage.setItem('profile', JSON.stringify(data));
-                history.push("/home");
+                history.push("/profile");
             }      
         })
     }
