@@ -21,11 +21,14 @@ function Navbar() {
                 saveSearchDetail(data)
                 console.log(data);
         })
+
     }, [])
     const handleSelect=(e)=>{
         let value = e.target.innerText;
         document.getElementById("searchVal").innerText =value; 
-        selectedProfileId = e.target.id; 
+        selectedProfileId = e.target.id;
+        localStorage.setItem("profileId",selectedProfileId);
+        localStorage.setItem("profileName",value); 
    
     }
     const handleSearch=()=>{
@@ -35,6 +38,7 @@ function Navbar() {
         }catch(e){           
         }
         let search = document.getElementById("appSearch").value;
+        localStorage.setItem("searchVal",search); 
 
         if(profileId && search){
             history.push(`/search/${selectedProfileId}/${search}`);
@@ -53,7 +57,7 @@ function Navbar() {
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" id="searchVal" >
                    Self 
                 </a>
-                   <b class="caret"></b>
+                <b class="caret"></b>
                 <ul className="dropdown-menu searchUl" role="listbox" onClick={handleSelect}>
                  { searchDetail.map(item=>{
                             return(
@@ -87,7 +91,7 @@ function Navbar() {
         <ul className="navbar-nav">
             <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    Profile
+                {profile.firstName}
                 </a>
                 <div className="dropdown-menu">
                     <Link className="dropdown-item" to="/profile">Account</Link>
