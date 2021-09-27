@@ -22,6 +22,7 @@ function Recommendation() {
                                 </div>
                             </div>
                         </div>
+                        {recommendation[item+1] != undefined &&
                         <div className="col-sm-4">
                             <div className="rCard">
                                 <div>
@@ -34,6 +35,8 @@ function Recommendation() {
                                 </div>
                             </div>
                         </div>
+                        }
+                         {recommendation[item+2] != undefined &&
                         <div className="col-sm-4">
                             <div className="rCard">
                                 <div>
@@ -46,11 +49,14 @@ function Recommendation() {
                                 </div>
                             </div>
                         </div>
+                        }
                         </div>
                     </Carousel.Item>
 
             )
-        }catch(e){}
+        }catch(e){
+            console.log(e);
+        }
     }
 
     return(

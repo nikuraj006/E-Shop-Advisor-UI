@@ -104,21 +104,21 @@ const handleFollow=(e)=>{
 }
     
     const category = [
-        { key: "Cakes", cat: "Food" },
-        { key: "Icecreams", cat: "Food" },
-        { key: "Shakes", cat: "Food" },
-        { key: "Sweets", cat: "Food" },
-        { key: "Western", cat: "Fashion" },
-        { key: "Ethnic", cat: "Fashion" },
-        { key: "Roses", cat: "Flowers" },
-        { key: "Tulips", cat: "Flowers" },
-        { key: "Orchids", cat: "Flowers" },
-        { key: "Mobiles", cat: "Gadgets" },
-        { key: "Laptops", cat: "Gadgets" },
-        { key: "Home Appliances", cat: "Gadgets" },
-        { key: "Jewellery", cat: "Accessories" },
-        { key: "Sunglasses", cat: "Accessories" },
-        { key: "Hair Accessories", cat: "Accessories" }
+        { name: "Cakes", cat: "Food" },
+        { name: "Icecreams", cat: "Food" },
+        { name: "Shakes", cat: "Food" },
+        { name: "Sweets", cat: "Food" },
+        { name: "Western", cat: "Fashion" },
+        { name: "Ethnic", cat: "Fashion" },
+        { name: "Roses", cat: "Flowers" },
+        { name: "Tulips", cat: "Flowers" },
+        { name: "Orchids", cat: "Flowers" },
+        { name: "Mobiles", cat: "Gadgets" },
+        { name: "Laptops", cat: "Gadgets" },
+        { name: "Home Appliances", cat: "Gadgets" },
+        { name: "Jewellery", cat: "Accessories" },
+        { name: "Sunglasses", cat: "Accessories" },
+        { name: "Hair Accessories", cat: "Accessories" }
       ]
       getAllProfile();
       
@@ -157,7 +157,7 @@ const handleFollow=(e)=>{
     let likesProducts = [];
     const constructLike=(item, index)=>{
            let subCat ={ "subCategory":{
-                "name":item.key,
+                "name":item.name,
                 "category":{
                 "name":item.cat
             }
@@ -169,7 +169,7 @@ const handleFollow=(e)=>{
     let disLikesProducts = [];
     const constructDisLike=(item, index)=>{
            var subCat ={ "subCategory":{
-                "name":item.key,
+                "name":item.name,
                 "category":{
                 "name":item.cat
             }
@@ -211,11 +211,10 @@ const handleFollow=(e)=>{
             if (data.profileId != undefined) {
                 localStorage.setItem('profile', JSON.stringify(data));
                 window.location.reload();
-            }else if(data.violations.length>0){
-                console.log(data.violations[0].message);
-
-            }      
-        })  
+            }     
+        }).catch(e=>{
+            console.log(e);
+        })
     
     }
 
@@ -284,14 +283,14 @@ const handleFollow=(e)=>{
                                     <div className="form-group categoryMaultiselect">
                                         <label>Likes:</label>
                                         <Multiselect 
-                                            displayValue="key"
+                                            displayValue="name"
                                             groupBy="cat"
                                             options={category}
                                             showCheckbox
                                             closeOnSelect="true"
                                             placeholder="Select Category"
                                             ref={likesRef}
-                                            // selectedValues={category}
+                                            selectedValues={profile.likesList.filter(i=>i.name!=null)}
                                         />
                                     </div>
                                 </div>
@@ -299,7 +298,7 @@ const handleFollow=(e)=>{
                                     <div className="form-group categoryMaultiselect">
                                         <label>Dislikes:</label>
                                         <Multiselect
-                                            displayValue="key"
+                                            displayValue="name"
                                             groupBy="cat"
                                             options={category}
                                             showCheckbox
@@ -307,7 +306,7 @@ const handleFollow=(e)=>{
                                             placeholder="Select Category"
                                             ref={dislikesRef}
                                             // searchable={true} 
-                                            // selectedValues={category}
+                                            selectedValues={profile.dislikesList.filter(i=>i.name!=null)}
                                         />
                                     </div>
                                 </div>
